@@ -1,0 +1,136 @@
+﻿@model PhonebookUsingMVC.Models.PhoneBook
+
+@{
+    ViewBag.Title = "Make A Booking";
+   
+}
+@using (Html.BeginForm("CreateNewPerson","Phonebook", FormMethod.Post, new { id = "myForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+     
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                 @Html.EditorFor(model => model.Number)
+                @Html.ValidationMessageFor(model => model.Number)
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+        <br />
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DateEntry, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateEntry)
+                @Html.ValidationMessageFor(model => model.DateEntry)
+            </div>
+        </div>
+        <br />*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.GroupNameId, "GroupNameId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("GroupNameId", (SelectList)ViewBag.CreatePerson, "----Select One----")
+                @Html.ValidationMessageFor(model => model.GroupNameId)
+            </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" id="PartialView">
+                
+                <input type="submit" value="Create" class="btn btn-default" onclick="someClick()" />
+                
+                @*<input id="savePerson" type="submit" value="Save" class="btn btn-default" onclick="someClick()" />
+                <input type="button" value="Add" id="btnConfirm" />*@
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<br /><br />
+<script type="text/javascript">
+     @*<<<<<<<<<<<<======Partial View validation=========>>>>>>>>>>>>>>>>*@
+    $.validator.unobtrusive.parse(document);
+
+
+
+    function someClick() { alert('Created Successfully...'); }
+
+    //$(document).ready(function () {
+    //    $("#PartialView").find("#btnConfirm").click(function () {
+    //        alert('button clicked');
+    //    });
+    //});
+    @*$(document).on('click', '#btnConfirm', function () {
+        function someClick() {
+            var number = $("#Number").val();
+            var firstName = $("#FirstName").val();
+            var lastName = $("#LastName").val();
+            var email = $("#Email").val();
+            var address = $("#Address").val();
+            var groupNameId = $("#GroupNameId").val();
+            var mydata = {
+                Number: number,
+                FirstName: firstName,
+                LastName: lastName,
+                Email: email,
+                Address: address,
+                GroupNameId: groupNameId
+            };
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreateNewPerson1", "PhoneBook")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(mydata),
+                dataType: "json",
+                success: function(data) {
+                    alert("Success ");
+                },
+            });
+
+        }
+    });*@
+
+</script>
